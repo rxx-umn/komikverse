@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KomikVerse</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
- 
     @font-face {
       font-family: 'Naruto';
       src: url('naruto_font/njnaruto.ttf') format('truetype');
-    }
-
-    h1 {
-      font-family: 'Naruto', Arial, sans-serif;
-      color: red;
-      text-shadow: #222;
     }
 
     body {
@@ -24,16 +18,22 @@
       padding: 0;
       background-color: #111;
       color: #fff;
+      background-image: url("images/background.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      text-align: center;
     }
 
-    h1 {
-      text-align: center;
-      padding: 20px 0;
+    h1, h2 {
+      font-family: 'Naruto', Arial, sans-serif;
+      color: red;
+      text-shadow: 2px 2px 4px #000000;
     }
 
     .navbar {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
       background-color: #c10000;
       padding: 10px;
@@ -42,16 +42,19 @@
 
     .search-form {
       display: flex;
+      flex-direction: column;
       align-items: center;
+      margin-bottom: 10px;
     }
 
     .search-form input[type="text"] {
       padding: 5px;
-      margin-right: 10px;
+      margin: 5px;
       border-radius: 3px;
       border: none;
       background-color: #ffffff;
       color: #000000;
+      width: 80%;
     }
 
     .search-form button {
@@ -61,6 +64,7 @@
       background-color: #777;
       color: #fff;
       cursor: pointer;
+      width: 80%;
     }
 
     .genre-list {
@@ -68,10 +72,12 @@
       margin: 0;
       padding: 0;
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .genre-list li {
-      margin-right: 10px;
+      margin: 5px;
     }
 
     .genre-list li a {
@@ -89,6 +95,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       grid-gap: 20px;
+      padding: 0 10px;
     }
 
     .comic {
@@ -106,11 +113,9 @@
     }
 
     .comic img {
-      flex-grow: 1;
       width: 100%;
       height: auto;
       object-fit: cover;
-      border-radius: 5px;
     }
 
     .comic .content {
@@ -121,7 +126,6 @@
       margin: 0;
       color: #fff;
       font-size: 16px;
-      text-align: center; /* Menengahkan judul */
     }
 
     .comic p {
@@ -132,7 +136,7 @@
 
     .comic .rating {
       display: flex;
-      justify-content: center; /* Menengahkan rating */
+      justify-content: center;
       align-items: center;
     }
 
@@ -144,7 +148,7 @@
 
     .button-container {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       margin-bottom: 20px;
     }
 
@@ -156,31 +160,15 @@
       background-color: #777;
       color: #fff;
       cursor: pointer;
+      margin: 5px;
     }
 
     .next-button {
-      order: 1;
+      background-color: #c10000;
     }
 
-    .popular-comics {
-      text-align: center;
-      font-family: 'Naruto', Arial, sans-serif;
-    }
-
-    /* Category styles */
-    .category {
-      padding: 0 20px;
-  
-    }
-
-    .category h2 {
-      text-align: left;
-      
-    }
-
-    .popular-comics {
-      position: relative;
-      cursor: pointer;
+    .next-button:hover {
+      background-color: #ff0000;
     }
 
     .tooltip {
@@ -198,164 +186,122 @@
       transition: opacity 0.3s;
     }
 
+    .popular-comics {
+      position: relative;
+      cursor: pointer;
+    }
+
     .popular-comics:hover .tooltip {
       opacity: 1;
     }
 
     .slideshow-container {
-  position: relative;
-  max-width: 100%;
-  height: 60vh; /* Mengatur tinggi menjadi fullscreen */
-  margin: auto;
-  margin-bottom: 20px; /* Menambahkan ruang antara slideshow dan komik-komik */
-  z-index: 1; /* Memberikan z-index yang lebih rendah */
-}
+      position: relative;
+      max-width: 100%;
+      height: 60vh;
+      margin: auto;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.comic-container {
-  position: relative;
-  z-index: 2; /* Memberikan z-index yang lebih tinggi */
-}
+    .slideshow-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      z-index: -1;
+      filter: brightness(0.7);
+    }
 
-.slideshow-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.85;
-  z-index: -1;
-  filter: brightness(0.7);
-}
-.slideshow-container {
-  position: relative;
-  max-width: 100%;
-  height: 60vh;
-  margin: auto;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
+    .slideshow-container h2 {
+      color: #f22828;
+      font-size: 5vw;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
-.slideshow-container h2 {
-  color: #f22828;
-  font-size: 80px;
-  text-align: center;
-  font-family: 'Naruto', Arial, sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-body {
-            background-image: url("images/background.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-       } 
+    .person {
+      display: inline-block;
+      width: 80%;
+      max-width: 200px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .person img {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .person img:hover {
+      transform: scale(1.1);
+    }
+
+    .person p {
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-form {
+        width: 100%;
+      }
+
+      .search-form input[type="text"],
+      .search-form button {
+        width: 100%;
+      }
+
+      .genre-list {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .genre-list li {
+        margin: 5px 0;
+      }
+
+      .slideshow-container h2 {
+        font-size: 8vw;
+      }
+
       .person {
-        display: inline-block;
-        width: 20%;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      
-      .person img {
-        display: block;
-        margin: 0 auto;
-        width: 70%;
-        border-radius: 50%;
+        width: 100%;
+        max-width: none;
       }
 
-      .person img:hover {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-}
-.person p {
-  opacity: 0;
-  animation: fadeIn 1s ease-in-out forwards;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.navbar {
-  background-color: #c10000; /* warna background */
-  overflow: hidden;
-}
-
-/* styling untuk link pada navigasi bar */
-.navbar a {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* membuat link "About Us" menjadi aktif */
-.navbar a.active {
-  background-color: red;
-}
-
-/* styling saat hover link */
-.navbar a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-h1 {
-  text-align: center;
-  font-size: 48px;
-  text-transform: uppercase;
-}
-
-
-@font-face {
-    font-family: 'Naruto';
-    src: url('ninja_naruto/njnaruto.ttf');
-   
-  }
-.person {
-  font-family: "Naruto";
-  color:white;
-}
-h2 {
-    font-family: 'Naruto';
-    text-shadow: 2px 2px 4px #000000;
-  }
-
-  h1 {
-    font-family: 'Naruto';
-    color:red;
-    text-shadow: 2px 2px 4px #000000;
-  }
-
-legend {
-  text-shadow: 2px 2px 4px #000000;
-}
-
-img {
-  border: 5px solid black; /*menentukan lebar, jenis, dan warna border*/
-  text-shadow: 2px 2px 4px #000000;
-}
-
-
-
-
+      .comic-container {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-  <br><br>
   <div class="navbar">
     <form class="search-form">
       <input type="text" id="search-input" placeholder="Cari komik...">
@@ -365,9 +311,9 @@ img {
       <li><a href="horror.html">Horror</a></li>
       <li><a href="fantasy.html">Fantasy</a></li>
       <li><a href="sci-fi.html">Sci-FI</a></li>
-      
     </ul>
   </div>
+
   <div id="search-results"></div>
 
   <div class="button-container">
@@ -381,41 +327,35 @@ img {
     <img class="slideshow-image" src="Slides/4.jpg" alt="Slideshow Image 4">
     <img class="slideshow-image" src="Slides/5.jpg" alt="Slideshow Image 5">
     <img class="slideshow-image" src="Slides/6.jpg" alt="Slideshow Image 6">
-    <!-- Tambahkan gambar-gambar landscape lainnya di sini -->
     <h2 class="slideshow-title">K o m i k V e r s e</h2>
   </div>
+
   <div class="category">
     <h2 class="popular-comics" onclick="location.href='popular.html'">Popular Manga>></h2>
   </div>
-  <div class="comic-container" id="popularComic">
-    
-  </div>
 
-  <br><br>
+  <div class="comic-container" id="popularComic"></div>
 
   <div class="category">
     <h2 class="popular-comics" onclick="location.href='recent.html'">Recently Added>></h2>
   </div>
-  
-  <div class="comic-container" id="recent">
-  </div>
+
+  <div class="comic-container" id="recent"></div>
 
   <script>
-
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       var form = document.querySelector(".search-form");
 
-      form.addEventListener("submit", function(event) {
+      form.addEventListener("submit", function (event) {
         event.preventDefault(); // Mencegah form dikirim secara default
 
         var input = document.getElementById("search-input").value;
         var result = document.getElementById("search-result");
-        
+
         // Proses pencarian atau tindakan lain yang Anda inginkan
         result.innerHTML = "Hasil pencarian: " + input;
       });
     });
-    // JavaScript code here
 
     const slideshowImages = document.querySelectorAll('.slideshow-image');
     let currentImageIndex = 0;
@@ -428,56 +368,54 @@ img {
 
     setInterval(showNextImage, 3000); // Ganti gambar setiap 3 detik (3000 ms)
 
-    function getMangaData(){
+    function getMangaData() {
       const mangaName = document.getElementById('search-input').value;
       localStorage.setItem("searched", mangaName);
       console.log(localStorage);
-      const delay=125;
-      setTimeout(function(){
+      const delay = 125;
+      setTimeout(function () {
         window.location.href = "searchPage.html";
       }, delay);
     }
-  
   </script>
   <script src="API.js"></script>
 
-  
-<h1><center>About US!</center></h1>
+  <h1>About US!</h1>
 
-<fieldset>
-    <center>
+  <fieldset>
+    <div class="person">
+      <legend><b>Rahmat Kurniawan</b></legend>
+      <a href="https://www.instagram.com/rxx.zip/">
+        <img src="images/Rahmat.jpeg" alt="Foto Person 1">
+      </a>
+      <p>Rahmat Kurniawan<br><b>NIM: 00000069647</b></p>
+    </div>
 
-      <div class="person">
-        <legend><b>Rahmat Kurniawan</b></legend>  
-        <a href="https://www.instagram.com/rxx.zip/">
-          <img src="images/Rahmat.jpeg" alt="Foto Person 1" onclick="window.location.href='https:https://www.instagram.com/rxx.zip/'">
-        </a>
-        <p> Rahmat Kurniawan<br><b>NIM: 00000069647</b></p>
-      </div>
-      
-      <div class="person">
-        <legend><b>Glen Owen</b></legend>
-        <a href="https://www.instagram.com/glen_owenn/">
-          <img src="images/Owen 2.jpeg" alt="Foto Person 2" onclick="window.location.href='https://www.instagram.com/glen_owenn/'">
-        </a>
-        <p>Glen Owen <br><b>NIM: 00000070244</b></p>
-      </div>
-      
-      <div class="person">
-        <legend><b>Devon Aurelius</b></legend> 
-        <a href="https://www.instagram.com/devonsung7/">
-          <img src="images/Devon.jpeg" alt="Foto Person 4" onclick="window.location.href='https://www.instagram.com/devonsung7/'">
-        </a>
-        <p> <p>Devon Aurelius <br><b>NIM: 00000068889</b></p></p>
-      </div>
-      
-      <div class="person">
-        <legend><b>Jonathan Farrel</b></legend>
-        <a href="https://www.instagram.com/jonathan762004/">
-          <img src="images/Jhonatan.jpeg" alt="Foto Person 3" onclick="window.location.href='https://www.instagram.com/jonathan762004/'">
-        </a>
-        <p> <p> Jonathan Farrel MS <b><br>NIM: 00000069283</b></p></p>
-      </div>
-    </center>
+    <div class="person">
+      <legend><b>Glen Owen</b></legend>
+      <a href="https://www.instagram.com/glen_owenn/">
+        <img src="images/Owen 2.jpeg" alt="Foto Person 2">
+      </a>
+      <p>Glen Owen<br><b>NIM: 00000070244</b></p>
+    </div>
+
+    <div class="person">
+      <legend><b>Devon Aurelius</b></legend>
+      <a href="https://www.instagram.com/devonsung7/">
+        <img src="images/Devon.jpeg" alt="Foto Person 4">
+      </a>
+      <p>Devon Aurelius<br><b>NIM: 00000068889</b></p>
+    </div>
+
+    <div class="person">
+      <legend><b>Jonathan Farrel</b></legend>
+      <a href="https://www.instagram.com/jonathan762004/">
+        <img src="images/Jhonatan.jpeg" alt="Foto Person 3">
+      </a>
+      <p>Jonathan Farrel MS<br><b>NIM: 00000069283</b></p>
+    </div>
+  </fieldset>
+
 </body>
+
 </html>
