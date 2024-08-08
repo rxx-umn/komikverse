@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(Background.jpg);
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      margin: 0;
+      font-family: "Naruto", Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: #c10000;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 24px;
+      text-decoration: none;
+    }
+
+    .comic-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .comic-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-right: 20px;
+      border-right: 2px solid #c10000; /* Pembatas */
+      padding-right: 20px; /* Jarak antara konten dan pembatas */
+    }
+
+    .comic-cover {
+      max-width: 300px;
+      max-height: 300px;
+      margin-bottom: 20px;
+    }
+
+    .comic-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .comic-description {
+      margin-bottom: 20px;
+    }
+
+    .episode-button {
+      padding: 10px 20px;
+      background-color: #c10000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .episode-button:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+  .comic-slides {
+  float: right;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+
+.comic-slides img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+@font-face {
+    font-family: 'Naruto';
+    src: url('naruto_font/njnaruto.ttf') format('truetype');
+   
+  }
+
+  h1 {
+    font-family: 'Naruto', Arial, sans-serif;
+    color: red;
+    text-shadow: #222;
+   
+  }
+    body {
+      font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  color: #fff;
+    }
+    
+    h1 {
+  text-align: center;
+  padding: 20px 0;
+}
+    
+    .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c10000;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input[type="text"] {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 3px;
+  border: none;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.search-form button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #777;
+  color: #fff;
+  cursor: pointer;
+}
+
+.genre-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.genre-list li {
+  margin-right: 10px;
+}
+
+.genre-list li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.genre-list li a:hover {
+  background-color: #555;
+  border-radius: 3px;
+}
+
+    
+.comic-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+.comic {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: #333;
+  box-shadow: 0 0 10px rgba(210, 21, 21, 0.788);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+    
+.comic:hover {
+  transform: scale(1.05);
+}
+
+.comic img {
+  flex-grow: 1;
+  width: 100%;
+  height: 10%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.comic .content {
+  padding: 10px;
+}
+
+.comic h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  text-align: center; /* Menengahkan judul */
+}
+
+.comic p {
+  margin: 5px 0 0;
+  color: #ccc;
+  font-size: 14px;
+}
+    
+.comic .rating {
+  display: flex;
+  justify-content: center; /* Menengahkan rating */
+  align-items: center;
+}
+
+.comic .rating i {
+  color: gold;
+  margin-right: 2px; 
+  font-size: 14px; 
+}
+
+    .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .back-button,
+  .next-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #777;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .next-button {
+    order: 1;
+  }
+  .popular-comics h2 {
+    text-align: center;
+    font-family: 'Naruto', Arial, sans-serif;
+   
+    }
+  
+
+  /* Category styles */
+.category {
+  padding: 0 20px;
+}
+
+.category h2 {
+  text-align: left;
+  font-family: 'Naruto', Arial, sans-serif;
+}
+
+.popular-comics {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.popular-comics:hover .tooltip {
+  opacity: 1;
+}
+
+
+
+
+  </style>
+</head>
+
+<body>
+  <br><br>
+  <div class="navbar">
+    <form class="search-form">
+      <input type="text" id="search-input" placeholder="Cari komik...">
+      <button type="submit" onclick="getMangaData()">Cari</button>
+    </form>
+    <ul class="genre-list">
+      <li><a href="project.html">Home</a></li>
+      <li><a href="horror.html">Horror</a></li>
+      <li><a href="fantasy.html">Fantasy</a></li>
+      <li><a href="sci-fi.html">Sci-FI</a></li>
+    </ul>
+  </div>
+  <div id="search-results"></div>
+
+  <div class="button-container">
+  <button class="back-button" onclick="history.back()">Back</button>
+  
+  <button class="next-button" onclick="location.href='page2.html'">Next</button>
+  </div>
+  
+  <div class="category">
+    <h2 class="popular-comics">>>Information<span class="tooltip" onclick="redirectToPage()"></span></h2>
+
+  </div>
+  <div class="comic-container" id="information">
+    <!--<div class="comic-info">
+      <img class="comic-cover" src="Horror/Iamahero.jpg" alt="Cover Komik">
+      <h2 class="comic-title">I Am a Hero</h2>
+      <p class="comic-description">Petualangan Hideo Suzuki, seorang penulis manga yang tidak terlalu beruntung dalam kariernya. Ketika terjadi zombie outbreak, Hideo harus berjuang untuk bertahan hidup dan melindungi teman-temannya. Dan situasi yang kacau ini, untuk pertama kalinya ia benar-benar merasa menjadi tokoh utama atau karakter Hero dalam hidupnya.</p>
+      <div>
+        <button class="episode-button">Vol 1</button>
+        <button class="episode-button">Vol 2</button>
+        <button class="episode-button">Vol 3</button>
+        <button class="episode-button">Vol 4</button>
+        <button class="episode-button">Vol 5</button>
+        <button class="episode-button">Vol 6</button>
+      </div>
+    </div>
+    <div class="comic-slides">
+        <img src="Main/1.jpg" alt="Slide 1">
+     </div>
+     <div class="comic-slides">
+        <img src="Main/2.jpg" alt="Slide 2">
+      </div>
+      <div class="comic-slides">
+        <img src="Main/3.jpg" alt="Slide 3">
+      </div>
+    </div>
+  </div>-->
+
+  <script src="API4.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var form = document.querySelector(".search-form");
+
+      form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Mencegah form dikirim secara default
+
+        var input = document.getElementById("search-input").value;
+        var result = document.getElementById("search-result");
+        
+        // Proses pencarian atau tindakan lain yang Anda inginkan
+        result.innerHTML = "Hasil pencarian: " + input;
+      });
+    });
+    function getMangaData(){
+      const mangaName = document.getElementById('search-input').value;
+          localStorage.setItem("searched", mangaName);
+          console.log(localStorage);
+          const delay=125;
+          setTimeout(function(){
+            window.location.href = "searchPage.html";
+          }, delay);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KomikVerse</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+ 
+    @font-face {
+    font-family: 'Naruto';
+    src: url('naruto_font/njnaruto.ttf') format('truetype');
+   
+  }
+
+  h1 {
+    font-family: 'Naruto', Arial, sans-serif;
+    color: red;
+    text-shadow: #222;
+   
+  }
+    body {
+      font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  color: #fff;
+    }
+    
+    h1 {
+  text-align: center;
+  padding: 20px 0;
+}
+    
+    .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c10000;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input[type="text"] {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 3px;
+  border: none;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.search-form button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #777;
+  color: #fff;
+  cursor: pointer;
+}
+
+.genre-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.genre-list li {
+  margin-right: 10px;
+}
+
+.genre-list li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.genre-list li a:hover {
+  background-color: #555;
+  border-radius: 3px;
+}
+
+    
+.comic-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+.comic {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: #333;
+  box-shadow: 0 0 10px rgba(210, 21, 21, 0.788);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+    
+.comic:hover {
+  transform: scale(1.05);
+}
+
+.comic img {
+  flex-grow: 1;
+  width: 100%;
+  height: 10%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.comic .content {
+  padding: 10px;
+}
+
+.comic h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  text-align: center; /* Menengahkan judul */
+}
+
+.comic p {
+  margin: 5px 0 0;
+  color: #ccc;
+  font-size: 14px;
+}
+    
+.comic .rating {
+  display: flex;
+  justify-content: center; /* Menengahkan rating */
+  align-items: center;
+}
+
+.comic .rating i {
+  color: gold;
+  margin-right: 2px; 
+  font-size: 14px; 
+}
+
+    .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .back-button,
+  .next-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #777;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .next-button {
+    order: 1;
+  }
+  .popular-comics h2 {
+    text-align: center;
+    font-family: 'Naruto', Arial, sans-serif;
+   
+    }
+  
+
+  /* Category styles */
+.category {
+  padding: 0 20px;
+}
+
+.category h2 {
+  text-align: left;
+  font-family: 'Naruto', Arial, sans-serif;
+}
+
+.popular-comics {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.popular-comics:hover .tooltip {
+  opacity: 1;
+}
+
+
+  </style>
+</head>
+<body>
+  
+  <br><br>
+  <div class="navbar">
+    <form class="search-form">
+      <input type="text" id="search-input" placeholder="Cari komik...">
+      <button type="submit" onclick="getMangaData()">Cari</button>
+    </form>
+    <ul class="genre-list">
+        <li><a href="project.html">Home</a></li>
+        <li><a href="horror.html">Horror</a></li>
+        <li><a href="fantasy.html">Fantasy</a></li>
+        <li><a href="sci-fi.html">Sci-FI</a></li>
+    </ul>
+  </div>
+  <div id="search-results"></div>
+
+  <div class="button-container">
+  <button class="back-button" onclick="history.back()">Back</button>
+  
+  <button class="next-button" onclick="location.href='page2.html'">Next</button>
+  </div>
+  
+  <div class="category">
+    <h2 class="popular-comics">>>Fantasy Comics<span class="tooltip" onclick="redirectToPage()"></span></h2>
+
+  </div>
+  <div class="comic-container" id="fantasyStuff">
+
+  </div>
+
+  <script src="API3.js"></script>
+  <script>
+        document.addEventListener("DOMContentLoaded", function() {
+      var form = document.querySelector(".search-form");
+
+      form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Mencegah form dikirim secara default
+
+        var input = document.getElementById("search-input").value;
+        var result = document.getElementById("search-result");
+        
+        // Proses pencarian atau tindakan lain yang Anda inginkan
+        result.innerHTML = "Hasil pencarian: " + input;
+      });
+    });
+    function getMangaData(){
+      const mangaName = document.getElementById('search-input').value;
+          localStorage.setItem("searched", mangaName);
+          console.log(localStorage);
+          const delay=125;
+          setTimeout(function(){
+            window.location.href = "searchPage.html";
+          }, delay);
+    }
+  </script>
+
+</body>
+</html>      
