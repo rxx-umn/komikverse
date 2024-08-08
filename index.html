@@ -18,69 +18,89 @@
       height: 100vh;
       margin: 0;
       font-family: "Naruto", Arial, sans-serif;
+      text-align: center;
     }
 
     @keyframes color-change {
-  0% {
-    color: #fff; /* Warna awal */
-  }
-  16.666% {
-    color: #e60202; /* Warna merah */
-  }
-  33.333% {
-    color: #fff; /* Warna awal */
-  }
-  /* Ulangi pola warna untuk sisa persentase */
-  100% {
-    color: #fff; /* Warna awal */
-  }
-}
+      0% {
+        color: #fff; /* Warna awal */
+      }
+      16.666% {
+        color: #e60202; /* Warna merah */
+      }
+      33.333% {
+        color: #fff; /* Warna awal */
+      }
+      100% {
+        color: #fff; /* Warna awal */
+      }
+    }
+
     h1 {
-  font-size: 80px;
-  margin-bottom: 30px;
-  text-shadow: #1f1f1f;
-  animation: color-change 2s infinite; /* Terapkan animasi dengan durasi 6 detik dan ulang secara tak terbatas */
-}
+      font-size: 5vw;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px #1f1f1f;
+      animation: color-change 2s infinite; /* Terapkan animasi dengan durasi 2 detik dan ulang secara tak terbatas */
+    }
 
-.next-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #c10000;
-  color: #fff;
-  cursor: pointer;
-  font-size: 25px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-  width: 150px;
-  height: 50px;
-}
+    p {
+      font-size: 2vw;
+      margin: 10px 0;
+    }
 
-.next-button:hover {
-  background-color: #ff0000;
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
+    .next-button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #c10000;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2vw;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      width: 150px;
+      height: 50px;
+    }
 
-.next-button:active {
-  background-color: #990000;
-  transform: scale(0.95);
-  box-shadow: none;
-}
+    .next-button:hover {
+      background-color: #ff0000;
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
 
+    .next-button:active {
+      background-color: #990000;
+      transform: scale(0.95);
+      box-shadow: none;
+    }
 
     @font-face {
       font-family: "Naruto";
       src: url(naruto_font/njnaruto.ttf);
+    }
+
+    /* Media queries untuk responsivitas */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 6vw;
+      }
+      p {
+        font-size: 3vw;
+      }
+      .next-button {
+        font-size: 4vw;
+        width: 120px;
+        height: 40px;
+      }
     }
   </style>
 </head>
 
 <body>
   <h1>K o m i k V e r s e</h1>
-  <p>Warning:  SFW  filters  are  currently  only  partially  functional  on  search.</p>
-  <p>You  may  see  explicit  adult  materials,  although  outright  pornography  has  succesfully  been  filtered  out.</p>
-  <p>Proceed  at  your  own  risk.</p>
+  <p>Warning:  SFW filters are currently only partially functional on search.</p>
+  <p>You may see explicit adult materials, although outright pornography has successfully been filtered out.</p>
+  <p>Proceed at your own risk.</p>
   <button class="next-button" onclick="location.href='project.html'">N e x t</button>
 </body>
 
