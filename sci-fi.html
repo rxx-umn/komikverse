@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +31,8 @@
 
     .navbar {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between;
       align-items: center;
       background-color: #c10000;
       padding: 10px;
@@ -39,10 +41,10 @@
 
     .search-form {
       display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
       width: 100%;
       max-width: 500px;
-      margin-bottom: 10px;
     }
 
     .search-form input[type="text"] {
@@ -53,6 +55,8 @@
       background-color: #ffffff;
       color: #000000;
       flex: 1;
+      max-width: 300px;
+      min-width: 0;
     }
 
     .search-form button {
@@ -62,6 +66,7 @@
       background-color: #777;
       color: #fff;
       cursor: pointer;
+      font-size: 14px;
     }
 
     .genre-list {
@@ -69,20 +74,17 @@
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
-      width: 100%;
+      flex-wrap: wrap;
     }
 
     .genre-list li {
-      margin: 0 10px;
+      margin: 5px;
     }
 
     .genre-list li a {
       color: #fff;
       text-decoration: none;
-      padding: 5px 10px;
-      display: block;
-      text-align: center;
+      padding: 5px;
     }
 
     .genre-list li a:hover {
@@ -149,6 +151,7 @@
 
     .button-container {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       padding: 0 10px;
       margin-bottom: 20px;
@@ -163,6 +166,7 @@
       color: #fff;
       cursor: pointer;
       margin: 5px;
+      font-size: 14px;
     }
 
     .next-button {
@@ -214,6 +218,7 @@
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
+        align-items: flex-start;
       }
 
       .search-form {
@@ -223,45 +228,46 @@
       .search-form input[type="text"],
       .search-form button {
         width: 100%;
-        max-width: 100%;
+        max-width: 300px;
         margin-bottom: 10px;
+        box-sizing: border-box;
       }
 
       .genre-list {
         flex-direction: column;
-        width: 100%;
+        align-items: flex-start;
       }
 
       .genre-list li {
         margin: 5px 0;
       }
 
-      .comic-container {
-        grid-template-columns: 1fr;
-      }
-
       .button-container {
         flex-direction: column;
+        align-items: center;
       }
 
       .button-container .back-button,
       .button-container .next-button {
-        font-size: 14px;
         padding: 8px 16px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
       }
     }
 
     @media (max-width: 480px) {
       .search-form input[type="text"],
       .search-form button {
-        font-size: 14px;
-        padding: 8px;
+        font-size: 12px;
+        padding: 5px;
+        margin-bottom: 8px;
       }
 
       .button-container .back-button,
       .button-container .next-button {
-        font-size: 14px;
-        padding: 8px 16px;
+        padding: 8px 10px;
+        font-size: 12px;
       }
     }
   </style>
@@ -293,14 +299,16 @@
     <h2 class="popular-comics">>>Sci-Fi Comics<span class="tooltip" onclick="redirectToPage()"></span></h2>
   </div>
 
-  <div class="comic-container" id="scifiStuff"></div>
+  <div class="comic-container" id="scifiStuff">
+    <!-- Comic items will be dynamically loaded here -->
+  </div>
 
   <script src="API3.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       var form = document.querySelector(".search-form");
 
-      form.addEventListener("submit", function(event) {
+      form.addEventListener("submit", function (event) {
         event.preventDefault(); // Mencegah form dikirim secara default
 
         var input = document.getElementById("search-input").value;
@@ -316,7 +324,7 @@
       localStorage.setItem("searched", mangaName);
       console.log(localStorage);
       const delay = 125;
-      setTimeout(function() {
+      setTimeout(function () {
         window.location.href = "searchPage.html";
       }, delay);
     }
